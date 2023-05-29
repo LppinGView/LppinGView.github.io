@@ -1,4 +1,0 @@
-sass:
-  style: :compressed
-  # Where you keep your scss files
-  sass_dir: css/
