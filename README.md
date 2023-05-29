@@ -1,2 +1,2 @@
-# someone.github.io
+# someone's blog
 个人博客
