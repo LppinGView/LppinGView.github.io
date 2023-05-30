@@ -30,22 +30,6 @@ $("#search-menu").click(function(e){
 });
 
 
-function functionToExecute() {
-  const gitment = new Gitment({
-    id: 'LppinGView', // optional
-    owner: 'LppinGView',
-    repo: 'comment',
-    oauth: {
-      client_id: '61024dd4b93ebfa7a5a5',
-      client_secret: 'df0819e616d83c690e9e9175d6b7cd81dc2414c7',
-    },
-    // ...
-    // For more available options, check out the documentation below
-  })
-  
-  gitment.render('comments')
-}
-
 /*!
  * classie - class helper functions
  * from bonzo https://github.com/ded/bonzo
