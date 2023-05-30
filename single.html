@@ -286,8 +286,11 @@ function functionToExecute() {
     },
     }
     const gitment = new Gitment({
+        id: 'single.html', // optional
+        owner: 'lipingping',
+        repo: 'comment',
     // ...
-    theme: myTheme,
+        theme: myTheme,
     })
     gitment.render('container')
 }
