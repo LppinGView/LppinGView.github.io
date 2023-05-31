@@ -165,6 +165,80 @@
                     </script>
                   
                 </div>
+
+                <button onclick="authorizeWithGitHub()">Login with GitHub</button>
+                <script>
+                    // GitHub OAuth 配置
+                    const clientId = '61024dd4b93ebfa7a5a5';
+                    const redirectUri = 'https://lppingview.github.io';
+                    const scope = 'user';
+
+                    // 发起授权请求
+                    function authorizeWithGitHub() {
+                    window.location.href = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}`;
+                    }
+
+                    // 处理重定向后的页面
+                    function handleRedirect() {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const code = urlParams.get('code');
+
+                    if (code) {
+                        exchangeCodeForToken(code);
+                    } else {
+                        console.error('Authorization code not found.');
+                    }
+                    }
+
+                    // 使用授权码交换访问令牌
+                    function exchangeCodeForToken(code) {
+                    const params = {
+                        code: code,
+                        client_id: clientId,
+                        redirect_uri: redirectUri,
+                        client_secret: '6e90b0ac5c9525a65ac598ad64ab74a671fa1cda',
+                    };
+
+                    // 发起 POST 请求以获取访问令牌
+                    fetch('https://github.com/login/oauth/access_token', {
+                        method: 'POST',
+                        headers: {
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json',
+                        },
+                        body: JSON.stringify(params),
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                        const accessToken = data.access_token;
+                        getUserInfo(accessToken);
+                        })
+                        .catch(error => console.error('Error exchanging code for token:', error));
+                    }
+
+                    // 使用访问令牌获取用户信息
+                    function getUserInfo(accessToken) {
+                    fetch('https://api.github.com/user', {
+                        headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                        },
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                        const username = data.login;
+                        const email = data.email;
+
+                        // 在此处可以根据需要使用用户信息
+                        console.log('Username:', username);
+                        console.log('Email:', email);
+                        })
+                        .catch(error => console.error('Error getting user info:', error));
+                    }
+
+                    // 在页面加载时处理重定向
+                    handleRedirect();
+                </script>
+
             </main>
             <aside class="col-md-4">
                 <div class="widget widget-content">
