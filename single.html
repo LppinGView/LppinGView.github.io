@@ -137,108 +137,46 @@
                         </ul>
                     </div>
                 </section> -->
+
                 <div class="comments" id="comments">
     
-                    <div id="gitmentContainer" style="margin-bottom: -19px;"></div>
-                    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+                    <div id="gitalk-container" style="margin-bottom: -19px;"></div>
+                    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
                     <style>
-                      .gitment-container a {
+                      .gitalk-container a {
                         border: none;
                       }
                       .comments {
                         margin: 60px 0 0;
                       }
                     </style>
-                    <script src="js/gitment.browser.js" type="text/javascript"></script>
+                    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js" type="text/javascript"></script>
                     <script type="text/javascript">
-                      var gitment = new Gitment({
-                        id: '',
-                        title: '播客',
-                        owner: 'LppinGView',
-                        repo: 'comment',
-                        oauth: {
-                          client_id: '61024dd4b93ebfa7a5a5',
-                          client_secret: '6e90b0ac5c9525a65ac598ad64ab74a671fa1cda',
-                        },
-                      })
-                      gitment.render('gitmentContainer')
+                        const gitalk = new Gitalk({
+                            clientID: '61024dd4b93ebfa7a5a5',
+                            clientSecret: '6e90b0ac5c9525a65ac598ad64ab74a671fa1cda',
+                            repo: 'comment',      // The repository of store comments,
+                            owner: 'LppinGView',
+                            admin: ['LppinGView'],
+                            id: '',      // Ensure uniqueness and length less than 50
+                            distractionFreeMode: false  // Facebook-like distraction free mode
+                        })
+                        gitalk.render('gitalk-container')
+                    //     gitalk.render('gitalk-container')
+                    //   var gitment = new Gitment({
+                    //     id: '',
+                    //     title: '播客',
+                    //     owner: 'LppinGView',
+                    //     repo: 'comment',
+                    //     oauth: {
+                    //       client_id: '61024dd4b93ebfa7a5a5',
+                    //       client_secret: '6e90b0ac5c9525a65ac598ad64ab74a671fa1cda',
+                    //     },
+                    //   })
+                    //   gitment.render('gitmentContainer')
                     </script>
                   
                 </div>
-
-                <!-- <button onclick="authorizeWithGitHub()">Login with GitHub</button>
-                <script>
-                    // GitHub OAuth 配置
-                    const clientId = '61024dd4b93ebfa7a5a5';
-                    const redirectUri = 'https://lppingview.github.io/single.html';
-                    const scope = 'user';
-
-                    // 发起授权请求
-                    function authorizeWithGitHub() {
-                    window.location.href = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}`;
-                    }
-
-                    // 处理重定向后的页面
-                    function handleRedirect() {
-                    const urlParams = new URLSearchParams(window.location.search);
-                    const code = urlParams.get('code');
-
-                    if (code) {
-                        exchangeCodeForToken(code);
-                    } else {
-                        console.error('Authorization code not found.');
-                    }
-                    }
-
-                    // 使用授权码交换访问令牌
-                    function exchangeCodeForToken(code) {
-                    const params = {
-                        code: code,
-                        client_id: clientId,
-                        redirect_uri: redirectUri,
-                        client_secret: '6e90b0ac5c9525a65ac598ad64ab74a671fa1cda',
-                    };
-
-                    // 发起 POST 请求以获取访问令牌
-                    fetch('https://github.com/login/oauth/access_token', {
-                        method: 'POST',
-                        headers: {
-                        'Content-Type': 'application/json',
-                        Accept: 'application/json',
-                        },
-                        body: JSON.stringify(params),
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                        const accessToken = data.access_token;
-                        getUserInfo(accessToken);
-                        })
-                        .catch(error => console.error('Error exchanging code for token:', error));
-                    }
-
-                    // 使用访问令牌获取用户信息
-                    function getUserInfo(accessToken) {
-                    fetch('https://api.github.com/user', {
-                        headers: {
-                        Authorization: `Bearer ${accessToken}`,
-                        },
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                        const username = data.login;
-                        const email = data.email;
-
-                        // 在此处可以根据需要使用用户信息
-                        console.log('Username:', username);
-                        console.log('Email:', email);
-                        })
-                        .catch(error => console.error('Error getting user info:', error));
-                    }
-
-                    // 在页面加载时处理重定向
-                    handleRedirect();
-                </script> -->
-
             </main>
             <aside class="col-md-4">
                 <div class="widget widget-content">
